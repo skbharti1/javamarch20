@@ -1,0 +1,103 @@
+
+====================================================
+Explore yourself
+-------------------------
+    -> main method in java
+    -> class loader 
+    -> javac command 
+    -> java command 
+====================================================
+
+9.30 to 11.30       ==> Session 
+11.30 to 12.00      ==> break
+12.00 to 1.00       ==> Explore/practice 
+1.00 to 2.00        ==> lunch break
+
+2.00 to 3.30        ==> Session
+3.30 to 3.45        ==> break 
+
+3.45 to 5.00        ==> task/assignment/assessment 
+5.00 to 5.30        ==> Session 
+
+
+
+
+
+
+HTML
+
+CSS 
+
+JavaScript 
+
+Bootstrap 
+
+
+
+Language                Library/apis/packages           Framework
+----------------        -----------------------         ---------------
+JavaScript              jQuery, Bootstrap,              Angular
+ (ECMAScript)                       React 
+
+Java                    collection framework, jdbc      Spring 
+                        servlet, io, .... 
+
+C#                      ............                    .Net
+
+Python                  .......                         Django
+
+   |                        |                              |
+provide                 Simplifies                  Standardized process                
+programming             your tasks 
+capabilities 
+
+
+Concepts --------> Syntax ----------> Best Practices 
+
+
+Java
+-----------
+    - introduced in 1991, initially called as 'OAK'
+    - originally developed by Sun Microsystems, but later bought by Oracle
+    - JDK 1.0, the first major version of java, introducted in 1995 // Jan 1996
+    - JDK 6 / 7 / 8 / 9 / 10 ..... 14
+    - Java 7
+    - Java 8
+    - platform-independent programming language 
+
+Java Editions
+---------------------------
+Java SE / J2SE
+    -> Core Java 
+    -> consist of most basic / standard libraries / general purpose apis
+            i.e. collection framework, IO, util, lang,
+            i.e. variables, data types, arrays, strings, Streams, 
+    -> mainly used to create applications for desktop environment  
+
+Java EE / J2EE
+    -> is used to create web apps, server side apps, networking, web services, etc.
+    -> it is community driven edition, which consist of contributions from industry experts 
+        i.e Servlet, JavaBeans, Messaging services, Security, Data Persistence i.e. JPA 
+
+
+Java ME / J2ME
+    -> concentrated for the applications running on embedded systems, mobiles and small devices 
+
+
+Java Features
+---------------------
+    -> Object oriented programming language 
+
+
+
+JVM
+    - Java Virtual Machine
+    - responsible to execute Byte Code(.class file) on given platform
+
+JRE 
+    - Java Runtime environement 
+    - JVM + libraries 
+
+JDK 
+    - Java Developemnt Kit 
+    - JRE + dev tools i.e. compiler (javac), debugger, packaging tools etc. 
