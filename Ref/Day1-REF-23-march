@@ -6,6 +6,8 @@ Explore yourself
     -> class loader 
     -> javac command 
     -> java command 
+
+    -> Memory management / Parts of memory in Java 
 ====================================================
 
 9.30 to 11.30       ==> Session 
@@ -101,3 +103,69 @@ JRE
 JDK 
     - Java Developemnt Kit 
     - JRE + dev tools i.e. compiler (javac), debugger, packaging tools etc. 
+
+variables
+---------------------
+
+1. local variables 
+        - variables declared inside a method/constructor/block 
+        - must be intialized before 1st used
+        - memory for local variables is allocated, when the method is invoked, destroyed when the method completes 
+
+        - access modifiers can not be used 
+
+2. instance variables 
+        - variables decalred inside a class, but outside method/constructor/block 
+        - memory is allocated for instance variables, whenver we create object using 'new' keyword
+
+                Student s1 = new Student()
+        - can have access modifiers 
+        - instance variables have default values (default constuctor initializes values to the instance variables)
+            numbers     = 0
+            booleans    = false
+            ref types   = null
+
+3. static/class variables 
+
+    - variables decalred inside a class, but outside method/constructor/block
+            using 'static' keyword 
+    - only 1 copy of static variable is allocated per class
+    - they are associated only with the class 
+    - using class name they can accessed directly 
+    - memory for static variables is allocated whenever the class is loaded  
+    - default values are similar to instance variables 
+    - can have access modifiers 
+
+Data types
+-------------------
+
+    1. primitive types 
+            - represent values directly 
+            - 8 primitive types in java
+
+                    byte 
+                    short 
+                    int 
+                    long 
+                    float
+                    double 
+                    char
+                    boolean 
+
+    2. reference types
+            - represent reference/address to the memory
+            - Array, String, class, Interface type varaibles are reference types  
+
+                    int arr[];
+                    String str;
+                    Student s1;
+
+    Naming conventions
+    ----------------------------
+    variables           : camelcased        int number;  int age;  int productName;
+
+    methods             : camel cased       void showStud() void calArea()
+
+    class/Interface     : 1st letter should be capital 
+                            class Student
+                            interface Printable 
