@@ -1,0 +1,188 @@
+Java SE
+---------------
+	-> fundamental programming capabilities 
+	-> standand libraries.... strings, EH, MT Collections, IO
+	-> used for creating standalone applications
+
+
+Java EE / J2EE
+------------------
+	- Server side programming
+	- enterprise application
+
+	-> Component based apis/libraries/technologies
+		-> web components 
+			Servlet/ jsp/ jstl / el
+		-> distributed components
+			EJBs, Web Services, CORBA
+		-> XML based components
+			JAX-B, JAX-P, JAX-RPC...
+
+	-> Service oriented apis/libraries/technologies
+		- JMS, Java mail api, JTA, JNDI, JCA...
+
+	-> protocol based apis/libraries/technologies
+		- HttpServlet, ...
+
+-------------------------------------------
+
+html
+	-> "what" content you want to place on your webpage
+	-> to define the "structure" of the webpage
+
+css
+	-> "how" content should appear on the webpage
+	-> to define the "style rules" for your webpage
+
+
+javascript/jquery/angular/react/vue/ember....
+
+	-> to provide functionalities on the webpage
+	-> to provide programming capabilities on the webpage
+	-> we can perform below tasks...	
+		- dom/css manipulation
+		- event handling
+		- ajax calls
+		- business logic 
+		- form validation
+		.....
+===================================================
+
+	-> application server vs web server
+	-> Servlet Container
+	-> Advantages of Servlet
+	-> servlet version history
+		
+		before servlet api 2.5
+			-> xml configuration
+
+		after servelt api 3.0
+			-> annotations are introduced 
+
+	-> http request TYPES
+			
+			GET
+			POST
+			PATCH
+			PUT
+			DELETE
+====================================================
+
+
+Web application
+---------------------
+
+
+
+how web application works
+----------------------------
+
+
+what are technologies used for server side applications
+-------------------------------------------------------------
+	languages		apis / frameworks
+
+	-> java 		Servlet / JSP / Spring MVC / ...
+	-> C/C++		CGI
+	-> PHP			Codeigniter / Zend / symphony / ...
+	-> C#			asp.net
+	-> ruby			...
+	-> javascript 		nodejs/expressjs
+	-> python		....
+
+
+http protocol
+-----------------------
+
+
+
+Servlet
+-----------------------
+
+	- Servlet is a java class, which is responsible to handle the REQUEST
+	- Servlets are used to process the REQUESTS and to create RESPONSE
+	- the "Servlet Container" of the application server/web server is reponsible to provide 		execution environment for Servlets
+
+
+Servlet API
+-------------------
+	-> provides the Specifications, decribing how to process the request
+	-> many application servers / web servers i.e. tomcat / jboss / glassfish have implemented the 				servlet api
+
+
+
+
+Advantages of Servlet
+-------------------------
+	-> the servlet container creates threads for handling requests
+
+
+How to create a servlet
+--------------------------------
+
+	1. by implmenting Servlet interface
+
+		void init(ServletConfig config)
+
+		void service(ServletRequest req, ServletResponse resp)
+
+		void destroy()
+
+		ServletConfig getServletConfig()
+
+		String getServletInfo()
+
+
+	2. by extending GenericServlet class
+
+	3. by extending HttpServlet class
+		-> additional features...
+			-> provides request specific methods
+
+			doGet()
+			doPost()
+			doDelete()
+			doPut()
+			doPatch()
+
+
+Life Cycle of servlet
+----------------------------
+	1. Loading the Servlet class into memory 
+	2. Instantiation of the Servlet
+	3. Initialization ----- init()
+	4. Processing the Request -------- service(req, resp)
+	5. destroy the servlet object
+
+Life cycle methods of servlet
+------------------------------
+		void init(ServletConfig config)
+
+		void service(ServletRequest req, ServletResponse resp)
+
+		void doXXX(req, resp)
+
+		void destroy()
+
+
+	http://localhost:8081/S1/myser1
+
+
+ServletContext object
+--------------------------------------------------
+
+	- per application one ServletContext object will be created by container
+
+ServletConfig object
+-------------------------------------------------
+
+
+
+Session object
+-------------------------------
+	- session object will be created per request
+
+
+
+
+

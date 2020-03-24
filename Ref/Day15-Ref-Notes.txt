@@ -1,0 +1,166 @@
+
+org.hibernate.Query			javax.persistence.Query
+		
+	.list()					.getResultList()
+
+
+
+
+Entity Relationships / Associations / Mappings
+-------------------------------------------------
+
+	@Entity
+	class Student {
+
+		String studid;	
+		String sname;
+		@Embedded
+		Address address;
+	}
+
+	@Entity
+	class Trainer {
+	
+		@Embedded
+		Address address;
+	}
+
+
+	@Embeddable	
+	class Address {
+		...
+		....
+		....	
+	}
+
+-------------------------------------------------
+
+	--> direction
+
+		- uni-direction
+		- bi-directional
+
+
+
+
+
+-------------------------------------------------------
+	@OneToOne		: join column
+	@ManytoOne		: join column
+	@OneToMany		: join table
+	@ManyToMany		: join table
+
+
+
+
+
+
+
+
+default fetching policy
+--------------------
+
+	@OneToOne		: EAGER
+	@ManyToOne		: EAGER
+	
+
+
+
+Entity Inheritance
+-----------------------------
+	*==> an Entity can inherit from any concrete/abstract class
+	*==> an Entity can inherit from a non-entity class as well
+
+
+	-> the hierarchical object model, is organized into flat relational model
+	-> Inheritance Strategy
+
+		1. single-table-per-class
+		2. join-subclass
+		3. table-per-concrete-class
+
+	@Entity
+	class Item {
+
+	}
+
+	@Entity
+	class Book extends Item{
+
+	}
+
+	@Entity
+	class CD extends Item{
+
+	}
+
+
+
+
+
+	@MappedSuperclass
+	class abstract Person {
+
+		@Id
+		int id;
+			
+		string name;
+
+	}
+
+	@Entity
+	class Employee extends Person {
+
+		int salary
+	}
+	
+	@Entity
+	class Student extends Person {
+		
+		int marks;
+	}
+	
+
+		-> Employee
+			-id
+			-name
+			-salary
+
+		-> Student
+			-id
+			-name
+			-marks
+		
+
+
+
+
+
+
+
+		
+JPQL 
+----------------------
+
+
+
+Custom queries
+------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

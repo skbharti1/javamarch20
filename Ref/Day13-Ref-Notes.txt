@@ -1,0 +1,342 @@
+JDBC API
+------------------
+
+-> Transaction
+---------------------------
+
+	-> transfer amount from one account to another account
+
+		1. withdraw amount from account 1	---> success
+		2. deposit amount to account 2		---> exception occurs
+
+Problems with JDBC
+-------------------------
+	- Java object Model
+		- uses principals of abstraction, encapsulation, modularity, hierarchy, 						polymorphism, concurrency, 
+		- identity 
+		- equality
+		- an object is an intance of a class
+
+	- Relational data Model
+		- every rdbms has two fundamentals rules
+			a. Entity Integrity
+			b. Referencial Integrity
+		- data is organized in the form of tables, diff tables are associated with each 					other by referencial integrity
+
+	- too many sql statements 
+	- manually handle the associations
+	- too many copy codes
+	- database dependent
+
+
+
+	- ResultSet object has a cursor, and by default the cursor point to row before 1st row
+	- .next() advances the cursor to the next row.. if the row found it retruns true	
+	- using getXXX(columnNumber) / getXXX(columnName) you can fetch values from the row
+
+
+	- by default ResultSet moves only in forward direction
+
+
+Solutions to these problems are....
+-----------------------------------------
+	-> use ORM tools
+	-> ORM refers to the technique of mapping the representations of java objects to relational 				databases
+	-> helps mapping the pojos with db tables
+	-> these mappings are configured using xml or java annotations
+	-> hides the complexity to deal with sql and low level jdbc api
+	-> it writes the sql and jdbc code for you...
+
+		
+ORM - object relation maping
+-------------------------------
+	- hibernate
+	- ibatis / mybatis
+	- toplink / eclipselink
+	- spring dao
+	- castor
+	- EJB - enterprise java beans
+	....
+	....
+
+Hibernate
+-------------------------------
+
+	- hibernate is a ORM tool to map java objects to relational tables
+	- allows to specify the configuration to use to connect with the database and to specify the way 		java object should be mapped witht the relational tables
+
+	- these configurations are specified either by using xml or annotations
+
+	- hibernate provides "Session" object, which represents the conversation between our app and db
+	- the "Session" object is used to persist the data
+	- the "Session" object comes from "SessionFactory", which is built by the configuration..
+	
+1. create the hibernate configuration file
+-------------------------------------------------
+
+	hibernate.cfg.xml
+	-----------------------
+		// specifiy the properties to connect to db
+		
+		<hibernate-configuration>
+			<session-factory>
+				<property name="connection.driver_class">.....</property>
+				<property name="connection.url"> ......... </property>
+				<property name="connection.username"> ....... </property>
+				<property name="connection.password"> ...... </property>
+
+				<property name="dialect">org.hibernate.dialect.OracleDialect</property>
+				
+				<mapping resource="domain/message-mapping.hbm.xml"/> 
+				
+			</session-factory>
+		</hibernate-configuration>
+
+
+---------------------------------------------------------------------------------------------------
+2. create the mapping file
+
+	message-mapping.hbm.xml
+	----------------------------
+		// specify the properties to map java object to tables
+
+
+	<hibernate-mapping>
+		<class name="Message" package="com.capg.beans">
+			<id name="id" column="id">
+				
+			</id>
+			<property name="text" column="text" type="string" />
+		</class>	
+		
+	</hibernate-mapping>
+
+
+3. add the hibernate jar files to the build path
+
+
+
+hibernate methods to perform crud operations
+------------------------------------------------
+
+	.save(entity)
+	.delete(entity)
+	.get(Class, ID)
+	// use setter methods to perfom update
+
+
+https://github.com/suhvishal/usgrad
+
+
+
+================================================
+---> Beans/pojo/BO vs Entities
+===================================================
+
+
+
+
+
+
+
+
+
+
+	    Specifications					implementation
+
+		JPA					Hibernate JPA / EclipsLink / MyBatis....
+		
+	   - interfaces					  - concrete classes that implement some 								interfaces
+	   - set of requirements..
+
+
+
+Hibernate
+------------------
+1. create hibernate.cfg.xml file
+	- specify db properties
+
+2. define pojo classes
+
+3. create mapping.hbm.xml file
+	- specify how the pojos should be mapped with the db tables
+
+4. obtain SessionFactory object
+
+5. obtain Session object
+
+6. obtain session object
+
+7. "Session" object is responsible to persist an object into db
+
+
+
+--------------------------------------------------------------------
+Hibernate / JPA / Hibernate JPA / Spring Data / Spring Data JPA
+-----------------------------------------------------------------------
+
+
+============================================================================================
+	-> What are the proprietory features / non-standard  features of hibernate / eclipselink etc.
+	-> version history of JPA
+	-> hibernate has 3 methods to persist an entity
+
+		.save(entity)
+		.saveOrUpdate(entity)
+		.persist(entity)
+			
+=====================================================================================
+
+
+JPA
+--------------
+	-> Java Persistence API
+
+		-> is a specification / set of rules | requirements the ORM tools should implement 
+
+	-> JPA packages
+	----------------------
+
+		javax.persistence		: core api
+		
+		javax.persistence.criteria	: Criteria API
+	
+		javax.persistence.metamodel	: Metamodel API
+		
+		javax.persistence.spi		: SPI for JPA providers
+
+Hibernate JPA 
+--------------------
+	-> the JPA implementation of Hibernate
+	-> it is a JPA Provider
+
+
+The other JPA Providers / Implementation
+---------------------------------------------
+	-> EclipseLink
+	-> Open JPA
+	-> ....
+
+
+
+
+
+Steps to use JPA
+--------------------------
+
+	1. define Entities
+		- we can define entities using either annotations / xml configuration
+
+
+		a. create a pojo class
+
+		b. provide appropriate properties/constructors/getters/setters
+
+		c. annotate the class with "@Entity"
+
+		d. specify the Identity column using @Id annotation
+	
+	2. create persistence.xml
+		- specify properties for db
+
+	3. obtain "EntityManagerFactory" object
+
+	4. obtain "EntityManager" object, which is responsible to manage entities
+
+
+Java Beans / Pojos /
+
+
+java object
+-------------------
+	-> java objects are just instance of class that live in memory
+
+JPA Entity
+-----------
+	-> the term "Entity" should be used for the Objects to be persisted
+	-> they can be concrete or abstract
+	-> entities also supprt inheritance, relationships
+	-> entities also have persistence identity that uniquely identifies them in the db
+
+
+Persistence Unit
+-----------------------
+	-> it is a named configuration for creating the "EntityManagerFactory"
+	-> set of "managed entities"
+
+		<persistence-unit name="JpaDemo3">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<class>com.capg.entities.Book</class>
+		
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver" 				/>
+			<property name="javax.persistence.jdbc.url" 					value="jdbc:oracle:thin:@localhost:1521:xe" />
+			<property name="javax.persistence.jdbc.user" value="system" />
+			<property name="javax.persistence.jdbc.password" value="password" />
+			
+		</properties>
+		
+	</persistence-unit>
+	
+
+==> default entity mapping
+---------------------------------
+
+	-> @Entity annotation
+	-> @Id, define an unique identifier
+	-> no-argument constructor
+	-> can be concrete or abstract class
+	**-> enums  or interfaces cannot be entities
+	-> all attributes become persistence
+
+	private long id			==> bigint
+	private String title		==> varchar(255)
+	private String author		==> varchar(255)
+	private boolean outOfStack;	==> smallint
+	private BookType booktype;	==> integer
+
+
+==>customize the default mapping
+------------------------------------
+
+	1. @Table(name="table-name")
+	2. @GeneratedValue() we can configure the id value creation
+
+		@GeneratedValue(strategy="xxxx")
+
+		a. GenerationType.SEQUENCE
+		b. GenerationType.IDENTITY
+		c. GenerationType.AUTO
+		d. GenerationType.TABLE
+
+	3. @Column(name="columnname")
+
+	4. @Transient
+
+	5. Column(TemporalType.Date)		TemporalType.TIME / TemporalType.TIMESTAMP
+
+Entity States
+------------------
+	-> Enties are also objects, but they live in memory for short time, but persistently stored in 					db
+
+Entity Relationships / Associations / Mappings
+-------------------------------------------------
+
+
+
+Entity Inheritance
+-----------------------------
+
+
+
+JPQL 
+----------------------
+
+
+
+Custom queries
+------------------------
+
+
+
+
