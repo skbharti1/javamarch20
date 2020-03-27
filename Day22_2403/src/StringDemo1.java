@@ -8,6 +8,7 @@ public class StringDemo1 {
 		//the physical keyboard via underlying OS
 		
 		Scanner scan = new Scanner(System.in);
+		
 		System.out.print("Enter some text :" );
 		
 		String str = scan.nextLine();

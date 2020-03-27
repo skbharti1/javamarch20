@@ -22,12 +22,9 @@
 	-> class is user defined data type
 	-> class is blueprint of an object 
 	-> class defines state/behavior of objects 
-
-
+	-> an object is an instance of a class 
 	-> object is an entity, has particular state/behavior
 	-> 
-
-
 
 	class <ClassName> {
 
@@ -45,9 +42,14 @@
 
 	}
 
+	the data and the code to manipulate that data can be written inside a single unit called as 'class'
 
-	===>Encapsulation
+
+
+	===>Encapsulation / Data Hiding 
 	-----------------------
+		-> the process of binding data and code into a single unit called as Encapsulation
+		
 		-> binding data and code together 
 		-> data hiding 
 	
@@ -120,20 +122,50 @@ Creating POJOs
 ==> Method overloading
 ---------------------------------
 
-	-> writing multiple methods inside a class with same name, but diff parameters 
-	-> can have any return type
-	-> can have any visibility 
+- writing multiple functions with same name but diff number/type of parameters 
+	- static binding / early binding / compile time binding / compile time polymorphism
+		- occurs during compile time 
+		- uses Type  information for binding 
+	- overloaded methods are bonded using static binding 
 
-	-> static binding 
+	- in overloading, the exact match has always higher priority 
+	- in overloading, child class argument will have higher priority than parent class
+	- in overloading, the method can have any return type
+
+		byte ---> short ---> int --> long ---> float ----> double 
+			  char--->
+
+	=================================================
+		automatic promotion in overloading
+		ambiguous situations in overloading 
+		type casting (up casting)
+		super/child class
+	===================================================
 
 ==> Inheritance
 ----------------------
+	-> Creating a class which derives from another class 
 	-> whenever a class inherits another class, it is called inheritance
 	-> parent --> chlid
 	-> implements IS-A relationship 
+	-> in java, using 'extends' keyword we can inherit a class to another class 
+
+	**==> in java, a class can inherit only one class at a time 
+			- multiple inheritance is not supported 
+
+	class A {
+
+	}
+
+	class B extends A {
+
+	}
+
+
 	
 	
-	why?
+	
+	why inheritance?
 	-> Reusability
 	-> Maintainability
 	-> Extendibility 
@@ -143,17 +175,90 @@ Creating POJOs
 
 	}
 
+	-> inheritance creates IS-A relationship between super and sub class 
+
+				Person
+				  |
+				Employee
+				  |
+	    ------------------------------
+		Trainer					Accountant 
+
+	Employee IS-A Person 
+	Trainer IS-A Employee 
+	Trainer IS-A Person 
+
+	-> all the members (non-private) of parent, by default they are inherited  to child class
+	-> Super class ref var can reference child class object 
+
+		Person p = new Employee();
+		Employee e = new Trainer();
+		Person p = new Trainer();
+
+		**=> Child class ref variable cannnot reference to Super class object 
 
 	-> private members can not be accessed outside the class
+
+Object class 
+-------------------
+
+	**=> Object class in java, is the super most class for all the classes 
+	**=> every class in java is implicitely subclass to Object 
+
+
+						Object	
+						  |
+		------------------------------------------------------------
+		String 		StringBuilder		Arrays		Person 		Car ...
+
+	Object class methods
+	-------------------------
+			toString()
+			equals()
+			wait()
+			notify()
+			notifyAll()
+
+
+
 
 
 ----------------------------------------------------------------------
 
+HAS-A relationshiops
+----------------------------------
 	-> Aggregation
 
-	-> Association
-
 	-> Composition
+
+	class Address{
+		//....street, city, pin, ...
+	}
+
+	class Supplier {
+		int supplierId;
+		String supplierName;
+		Address address;
+	}
+
+	class Customer {
+		int customerId;
+		String customerName;
+		Address address;
+	}
+
+
+**=> Composition 
+		-> strongly associated 
+
+		Univercity has several departments 
+
+
+**==>Aggregation
+		-> loosely associated 
+
+		a Department has sevaral Professors 
+
 
 
 	class Address {
