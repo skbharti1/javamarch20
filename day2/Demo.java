@@ -15,5 +15,9 @@ public class Demo{
            System.out.println(s1==s2);
            System.out.println(s3==s4);
 
+           char ch[] = {'w','e','l','c','o','m','e'};
+           String s5 = new String(ch);
+
+
     }
 }

@@ -4,7 +4,7 @@ class Student{
     String sName;
     int marks;
     static String collegeName;
-    
+
 
     //constructor
 
@@ -20,7 +20,7 @@ public class HelloWorld{
     }
 
     public static void main(String args[]){
-       Student s1 = new Student();
+       
     }
 }
 

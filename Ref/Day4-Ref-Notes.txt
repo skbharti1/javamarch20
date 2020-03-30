@@ -284,7 +284,7 @@ HAS-A relationshiops
 	*=> a super class ref var can reference to a child object 
 ---------------------------------------------------------------------------
 
-Poly-morphism
+Polymorphism
 -------------------------------------
 	-> same interface for multiple tasks
 	-> many forms of the same tasks
@@ -337,6 +337,31 @@ Poly-morphism
 Abstract class
 --------------------
 	-> defined using 'abstract' keyword
+	-> abstract class can not be instantiated (we cannot create object of abstract class)
+	-> abstract class just acts as a superclass, containing some commong properties/methods for the child classes
+	-> abstract class can have constructors/instance methods/static methods/...
+	-> the members of abstract class can be public/private/protected 
+
+			abstract class A {
+
+				//no any abstract method
+
+				//you can have 
+				// ...constructor
+				// ...concrete methods
+				//....static methods
+				// ...abstract methods
+			} 
+
+			abstract class B {
+				abstract void method();
+			}
+
+			class C extends B{
+				//must implement/override all abstract methods of its superclass B
+			}
+
+
 	-> if a class contains abstract method, then the class must be marked as abstract
 
 	abstract class X {
@@ -356,18 +381,68 @@ Abstract Methods
 
 Interface
 -------------------
+
+	-> similar to class
+
 	-> interface is used describe the set of requirements that a class has to implement
 	-> whenever an object has multiple is-a relationshiops, we can implement interfaces 
+	-> a class, that implements an interface mush override all the abstract methods of that interface
 
-
-	-> interface only describes the methods
+	-> interface  describes only abstract methods
 	-> in interface, all the methods are public and abstract
 
+	**=> a class can implement several interfaces 
+	**=> an interface can extend several interfaces..
+	**=> a ref variable of type interface, can reference to the object of 
+			class that implements the interface
+
+why interface?
+	-> to have multiple is-a relationships 
+	-> it describes set of requirements that a class has to implement 
 
 
+	interface Taxable{
+		//public static final variables;
+		//public abstract methods;
+
+		public abstract double calcTax();
+	}
+
+	interface Deliverable{
+		public abstract void dispatch();
+	}
+
+	class TVProduct implements Taxable{
+			public double calcTax(){
+				//....
+			}
+	}
+
+	Taxable t = new TVProduct();	//valid
 
 
+	interface Singer{
+		void sing();	//be default, all the methods in interface are public and abstract
+	}
 
+	interface Dancer{
+		void dance();
+	}
+
+	interface Talents extends Singer,Dancer{
+		//inherits sing() and dance() both methods from both interfaces
+	}
+
+	class TalentedPerson implements Talents{
+
+		public void sing(){
+			//....
+		}
+
+		public void dance(){
+			//....
+		}
+	}
 
 
 
