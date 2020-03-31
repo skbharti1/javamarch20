@@ -53,13 +53,13 @@ Standard libraries/ packages / apis
 			|
     ----------------------------------------------------------------
     |				|				|
- List<E> (i)  		      Set<E> (i)		     Queue <E> (i)
+ List<E> (i)  	Set<E> (i)		 Queue <E> (i)
     |				|			 	|
-ArrayList<E>		    HashSet<E>			-------------------
-LinkedList<E>		    LinkedHashSet<E>		|		  |
-Vector<E>		    TreeSet<E>		      Deque<E>(i)    BlockingQueue<E>(i)
-Stack<E>						|
-						    BlockingDeque<E>(i)
+ArrayList<E>    HashSet<E>			-------------------
+LinkedList<E>   LinkedHashSet<E>	|		  	  |
+Vector<E>		TreeSet<E>		 Deque<E>(i)    BlockingQueue<E>(i)
+Stack<E>						    |
+						     BlockingDeque<E>(i)
 
 
 			Map<K,V> (i)
@@ -73,7 +73,7 @@ Stack<E>						|
 
 Collection<E> interface
 -------------------------------
-	-> the supermost interface in the collection hierarchy, which describes some common 			methods
+	-> the supermost interface in the collection hierarchy, which describes some common methods
 
 		public boolean add(Object o)
 		public boolean addAll(Collection c)
@@ -184,35 +184,32 @@ Object class methods
 
 
 
-
-
-
-
-
-
-
 List<E> interface
 ------------------------
 	-> List is kind of collection, used to create index based collection of objects 
-	-> List allows null and duplicate elements 
+	**-> List allows null and duplicate elements 
 	-> a List Collection maintains "order of insertion"
-	-> A List can store only "objects"
+	**-> A List can store only "Objects" / 
+	**-> Primivites values cannot be stored in collection, 
+			if you want to store primitives values in any Collection, they must be 
+			wrapped inside an object of their corresponding ref type (Wrapper classes)
+
 
 
 	**=> primitives cannot be stored on any Collection
 
 
-			Collection
+			Collection {I}
 			    |
-			  List
+			  List {I}
 			    |
 			AbstractList (abstract class)
 			    |
 	----------------------------------------------------
-	|		    |		  |		
-	ArrayList	LinkedList	Vector
-					  |
-					Stack
+	    |		    		|			 	 |		
+	ArrayList {C}		LinkedList{C}		Vector {C}
+					    					 |
+					   					    Stack {C}
 
 
 
@@ -231,7 +228,7 @@ Implementation classes of List Interface
 
 	3. Vector 
 		-> similar to ArrayList
-		-> synchronized
+		-> synchronized (can be used in multithreaded environment)
 
 	4. Stack
 		-> similar to ArrayList
@@ -269,11 +266,12 @@ Operations on List
 
 		b. removing element from a list 
 	
-			.remove(int index)
+			.remove(int index);
 	
 			.remove(object o)
 				->note: it uses equals() method to compare the given object 						with all the other object
-				-> if you have, a collection of custom objects, make sure 						that, the equals() is implemented correctly
+				-> if you have, a collection of custom objects, make sure that, the equals() 
+						is implemented correctly
 
 
 		c. retrieve element from a list
@@ -304,7 +302,7 @@ Operations on List
 				sysout(value)
 			}
 
-		c. using iterator
+		c. using Iterator
 
 			Iterator<Integer> itr = list.iterator();
 
@@ -342,21 +340,21 @@ Operations on List
 
 
 
-	ArrayList		LinkedList		Vector		Stack
+	ArrayList		LinkedList		Vector			Stack
 
-	ordered	by		ordered	by		ordered	by	ordered	by
-	insertion		insertion		insertion	insertion
+	ordered	by		ordered	by		ordered	by		ordered	by
+	insertion		insertion		insertion		insertion
 
-	nullvalues		nullvalues		nullvalues	nullvalues
+	nullvalues		nullvalues		nullvalues		nullvalues
 
-	duplicates		duplicates		duplicates	duplicates
+	duplicates		duplicates		duplicates		duplicates
 
-	10			N/A			10		10
+	10				N/A				10				10
 
-	resizable		double			resizable	resizable
-	array			linked list		array		array
+	resizable		double			resizable		resizable
+	array			linked list		array			array
 
-
+									synchronized	synchronized
 
 Set<E> interface
 ---------------------------
