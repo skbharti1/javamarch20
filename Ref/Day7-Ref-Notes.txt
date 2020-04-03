@@ -9,8 +9,6 @@
 	-> override 'compare(Object o1, Object o2)
 	-> create external comparators 
 
-
-
 *==>contracts
 ---------------
 
@@ -43,7 +41,7 @@ Set Interface
 				Collection <-----------add()
 				    |
 		----------------------------------------------------
-		List			Set			Queue
+		List		Set								Queue
 		  |			 |
 					 |
 			    --------------------------------------------
@@ -140,7 +138,7 @@ Sorting the collection
 
 	1. sort a list 
 
-			Collections.sort();
+			Collections.sort(List list);
 
 
 	sort a list of numbers ====> alphanumeric
@@ -170,8 +168,14 @@ Comparable interface
 				//override equals() and hashCode()
 				//override toString()
 
-				//override the compareTo() method of comparable interface 
+				//override the compareTo() method of comparable interface
+				public int compareTo(Object obj){
+						Employee other = (Employee)obj;
+						
+				}
 		}
+
+		Collections.sort(empList)
 
 	comparevalue
 	--------------------
@@ -193,6 +197,7 @@ Comparable interface
 
 Comparator interface 
 --------------------------
+	-> java.util package provides the Comparable interface 
 	-> used to create exeternal comparators 
 
 		interface Comparator<E> {
@@ -209,7 +214,45 @@ Comparator interface
 		}
 
 
+
+TreeSet
+------------------
+
+		class Employee implements Comparable<Employee>{
+			public int compareTo(Employee other){
+				//logic 
+			}
+		}
+		Set<Employee> empSet = new TreeSet<>();
+
+		**=> if you want to create a treeset of custom objects, make sure that it defines 
+				natural ordering either by implementing Comparator interface or provide appropriate
+				Comparator at the time of constructing TreeSet
+
+
+		class Employee {
+			 
+		}
+
+		class EmpSalaryComparator implements Comparator<Employee>{
+			public int compare(Employee e1, Employee e2){
+				//logic 
+			}
+		}
+
+		Set<Employee> empSet = new TreeSet<>(new EmpSalaryComparator());
+
 		Set<Employee> empSet = new TreeSet<>(new EmpIdComparator());
+
+
+
+		Set set = new TreeSet(); //perform only basic operations 
+
+		SortedSet set = new TreeSet(); //perform additional operations such as rangeview
+
+		NavigableSet set = new TreeSet();
+
+
 
 
 
@@ -217,14 +260,14 @@ Comparator interface
 		Collection<E> (i)
 			|
     ----------------------------------------------------------------
-    |				|				|
- List<E> (i)  		      Set<E> (i)		     Queue <E> (i)
-    |				|			 	|
-ArrayList<E>		    HashSet<E>			-------------------
-LinkedList<E>		    LinkedHashSet<E>		|		  |
-Vector<E>		    TreeSet<E>		      Deque<E>(i)    BlockingQueue<E>(i)
-Stack<E>						|
-						    BlockingDeque<E>(i)
+    |				|					|
+ List<E> (i)  	Set<E> (i)		     Queue <E> (i)
+    |				|			 		|
+ArrayList<E>	HashSet<E>			---------------------
+LinkedList<E>	LinkedHashSet<E>		|		  		|
+Vector<E>		TreeSet<E>		      Deque<E>(i)    BlockingQueue<E>(i)
+Stack<E>								|
+						    	BlockingDeque<E>(i)
 
 
 	set.add(10);
@@ -246,7 +289,6 @@ Map<K,V> Interface
 -------------------------------
 
 	-> models a collection of objects, stored using key-value pairs 
-
 	-> doesn;t allow duplicate keys 
 
 		name-address
@@ -280,9 +322,13 @@ Map<K,V> Interface
 	Set<Map.Entry<K,V>> entrySet()
 
 
-
-
-
+					Map<K,V> 
+					  |
+					  |
+	------------------------------------------------------
+	HashTable 		HashMap 			TreeMap
+					   |
+					LinkedHashMap
 
 
 Implementation classes of Map interface
@@ -292,7 +338,7 @@ Implementation classes of Map interface
 
 		-> doesn;t allow null key
 		-> doesn;t maintain order of insertion
-		-> uses 'hashtable' datastructure
+		-> uses 'hashtable' data structure
 		-> it is synchronized 
 			(all methods in HashTable class are synchronized)
 		
@@ -320,89 +366,6 @@ Implementation classes of Map interface
 		Map<Manager, List<Workers>> map = new TreeMap<>();
 
 
-==> Queue
--------------------
-
-	-> Queue interface models a collection of elements which supports FIFO approach
-
-	-> Queue has a head and tell, new elements are added to the tail, and to-be processed 			elements are picked/removed from the head
-	
-	-> Deque models a queue collection, but it is double headed
-
-	-> BlockingQueue is a capacity based queue
-
-			Queue<E>
-			  |
-		   -------------------------
-		   |			  |
-		 Deque<E>		BlockingQueue<E>
-		  |
-	     BlockingDeque<E>
-		
-
-Implementation classes of Queue
--------------------------------------
-
-	=> General purpose implementations
-
-		LinkedList
-			-> maintains order of insertion
-
-		PriorityQueue
-			-> maintains sorted order of elements 
-
-		ArrayDeque
-			-> double ended queue
-
-	=> Concurrent implementations
-
-		ArrayBlockingQueue
-	
-		PriorityBlockingQueue
-
-		DelayQueue
-
-
-
-Operations of Queues
--------------------------------
-
-	Queue interface methods
-	-----------------------------------
-
-	insert		: add(e)		offer(e)
-
-	remove		: remove()		poll()
-
-	examine 	: element()		peek()
-
-
-	Deque interface methods
-	-----------------------------------
-
-	insert		: add(e)		offer(e)
-			  addFirst(e)		offerFirst(e)
-			  addLast(e)		offerLast(e)	
-	
-
-	remove		: remove()		poll()
-			  removeLast()		pollLast()
-			  removeFirst()		pollFirst()
-
-	examine 	: element()		peek()
-			  getFirst()		peekFirst()
-			  getLast()		peekLast()
-
-	
-
-	BlockingQueue interface methods
-	-----------------------------------
-
-	insert		: add(e)		offer(e)	put(e)
-
-	remove		: remove()		poll()		take(e)
-
-	examine 	: element()		peek()
 
 
 
@@ -412,4 +375,4 @@ Operations of Queues
 
 
 
-
+Map<KEY, VALUE> tmap = new TreeMap<>();

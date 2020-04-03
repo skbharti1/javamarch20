@@ -1,7 +1,7 @@
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Employee implements Comparable {
+public class Employee  {
 
 	private int empId;
 	private String firstName;
@@ -70,16 +70,7 @@ public class Employee implements Comparable {
 				+ sdf.format(joinDate) + ", " + salary + "]";
 	}
 
-	@Override
-	public int compareTo(Object o) {
-		Employee other = (Employee)o;
-		if(this.salary >= other.salary)
-			return 1;
-		else if(this.salary == other.salary)
-			return 0;
-		else 
-			return -1;
-	} 
+	
 	
 	
 }

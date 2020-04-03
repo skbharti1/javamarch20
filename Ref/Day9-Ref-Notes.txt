@@ -5,6 +5,175 @@
 
 ===============================
 
+*************************************************************************
+
+Exception Handling
+----------------------------
+
+	**=>unwated/unexpected event, that disturbs the normal flow of the program 		is called Exception
+
+	**=> in java, Exception is a class, and the object of this class can 		represent information about an error, which occurs at runtime
+
+	1. compile time errors 
+		- missing semicolons
+		- imcompatible types
+		- misspelings of variables, identifiers
+		- use undeclared variables 
+
+	2. run time errors 
+		- wrong input
+		- physical failure i.e. disk failure/ network failure 
+
+Exception handling
+----------------------------------
+
+1. find the problem (Hit the Exception)
+
+2. inform that an error has occured (throw Exception object)
+
+3. receive the error info (catch exception in catch block)
+
+4. take corrective actions (execute the code written in catch block)
+
+
+	-> the main method is executed inside a thread
+	-> for every thread JVM creates a runtime stack
+	-> every method call performed by that thread, will be stored in the 				corresponding stack (i.e. method, variables, ...)
+	-> during execution, if any unexpected event occurs at any point..
+		then, the method will create 'Exception Object' and it hands over 		that object to JVM
+	**-> JVM will then check, if that method contains any exception handling code, if yes, it passes the exception object to the corresponding code (catch block), otherwise it terminates the caller method and removes the entry from the stack and the program will be stopped abnormally. 
+
+understand the "Exception" object
+-----------------------------------------
+
+
+							Throwable
+			    				|
+ 	----------------------------------------------------------------------
+	Error														Exception 
+	  |															    |
+--------------------------------------------------					|
+VirtualMachineError    LinkageError     AssertionError				|
+ 	|													 			| 
+OutOfMemoryError													|
+StackOverFlowOver		  											|
+			-----------------------------------------------------------------------------------------------
+			RuntimeExpcetion				IOException			SQLException	 InterrupedExeption
+			  |
+			NullPointerException
+			ArithmaticException
+			ArrayIndexOutofBoundsException
+			IllegalArgumentException
+			ClassNotFoundException
+			IllegalStateException		
+					|->IllegalThreadStateException
+					|->IllegalMonitorStateException
+			..
+			...
+
+
+	**=> "Error" class describes internal errors 
+		i.e. VirtualMachineError, LinkageError, Memory related errors
+	**=> Error class indicates some serious problems, the app cannot handle these 		errors
+	**=> Exceptions can be handled 
+
+
+	**=> in java, Execeptions are objects, when you throw an exception, you are 		throwing an object
+
+
+Default Exception handling
+------------------------------------
+
+	**=> upon exception, the run-time system searches for all methods on the callstack and if it couldn't find the appropriate handler (catch block) then the run-time system handovers the exception object to "Default Exception Handler", which is a part of run-time system. 
+
+	**=> this defalut exception handler prints exception information in some format and terminates the program abnormally.
+
+
+
+Checked and Unchecked exceptions
+----------------------------------------
+
+Checked Expception
+-------------------
+	-> the excecptions which are checked by the compiler, which ensure you have appropriate handlers to handle the exceptions 
+	-> you must handle the checked exceptions at your own
+
+	**=> all the exceptions except RuntimeException are checked exceptions 
+			i.e. IOException, SQLException, etc. 
+
+Unchecked exceptions
+-----------------------------------
+	-> are not essentially handled in the program
+	-> if you don't have appropriate handlers
+		 - JVM will handle it by default using the "Default Exception handling"
+
+	- i.e. RuntimeException
+
+
+
+
+how to handle exception
+----------------------------------
+	1. using try-catch block
+
+		try {
+			//statement 1
+			
+			//statement 2
+			
+			//statement 3
+			
+		}catch(XXXXException e) {
+			//statment 4
+		}
+		
+		//statement 5
+
+	**==> CASE 1: if there are no exceptions
+				1, 2, 3, 5
+
+	**=> CASE 2: if an exception raised at statement 2 which matches to XXXXException
+				1, 4, 5
+				and program terminates normally
+
+	**==> CASE 3: if an exception raised at statement 2 which doesn't match to XXXXException
+				1
+				followed by abnormal termination
+
+
+
+	2. using try-catch-finally 
+
+			try{
+				
+				//code to be monitored
+				//risky code 
+
+			}catch(XXXXXException e){
+				//code to take corrective actions
+					//print/show appropriate message
+					//log the issue to the logger system
+			}finally{
+				//clean up code
+				//releasing the resources
+			}
+
+
+
+	2. using 'throws' keyword
+	3. usine 'throw' keyword
+
+
+
+
+*************************************************************************
+
+
+
+
+
+
+
 
 Exception Handling
 -----------------------------------

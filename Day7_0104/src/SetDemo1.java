@@ -1,9 +1,8 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class SetDemo1 {
 
@@ -21,19 +20,35 @@ public class SetDemo1 {
 //		System.out.println("numbers = " + numbers);
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+//		
+//		List<Employee> employees = new ArrayList<>();
+//		
+//		employees.add(new Employee(101, "Vishal", "Shah", sdf.parse("30-07-2018"), 8000));
+//		employees.add(new Employee(102, "Sateesh", "Kota", sdf.parse("01-02-2019"), 7000));
+//		employees.add(new Employee(103, "Siddhant", "Raje", sdf.parse("03-04-2017"), 3000));
+//		
+//		System.out.println(employees);
+//		
+//		EmpFirstNameComparator comparator = new EmpFirstNameComparator();
+//		//Collections.sort(employees, comparator );
+//		
+//		Collections.sort(employees, new EmpSalaryComparator());
+//		
+//		System.out.println("after sort," + employees);
 		
-		List<Employee> employees = new ArrayList<>();
+//		
+//		Set<Employee> empSet = new TreeSet<>(new EmpFirstNameComparator());
+//		empSet.add(new Employee(101, "Vishal", "Shah", sdf.parse("30-07-2018"), 8000));
+//		empSet.add(new Employee(102, "Sateesh", "Kota", sdf.parse("01-02-2019"), 7000));
+//		
+//		System.out.println(empSet);
 		
-		employees.add(new Employee(101, "Vishal", "Shah", sdf.parse("30-07-2018"), 8000));
-		employees.add(new Employee(102, "Sateesh", "Kota", sdf.parse("01-02-2019"), 7000));
-		employees.add(new Employee(103, "Siddhant", "Raje", sdf.parse("03-04-2017"), 3000));
 		
-		System.out.println(employees);
+		Set<String> names = new TreeSet<>();
 		
-		Collections.sort(employees);
+		names.addAll(Arrays.asList("Ram","Jay","Sham","Vishal","Adesh","Shiva","Rajshi","Amarthaluru","Jayalakshmi"));
 		
-		System.out.println("after sort," + employees);
-
+		System.out.println(names);
 	}
 
 }
