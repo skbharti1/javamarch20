@@ -10,9 +10,9 @@
 Exception Handling
 ----------------------------
 
-	**=>unwated/unexpected event, that disturbs the normal flow of the program 		is called Exception
+	**=>unwated/unexpected event, that disturbs the normal flow of the program is called Exception
 
-	**=> in java, Exception is a class, and the object of this class can 		represent information about an error, which occurs at runtime
+	**=> in java, Exception is a class, and the object of this class can represent information about an error, which occurs at runtime
 
 	1. compile time errors 
 		- missing semicolons
@@ -23,6 +23,7 @@ Exception Handling
 	2. run time errors 
 		- wrong input
 		- physical failure i.e. disk failure/ network failure 
+		- wrong logic/code
 
 Exception handling
 ----------------------------------
@@ -84,9 +85,13 @@ StackOverFlowOver		  											|
 Default Exception handling
 ------------------------------------
 
-	**=> upon exception, the run-time system searches for all methods on the callstack and if it couldn't find the appropriate handler (catch block) then the run-time system handovers the exception object to "Default Exception Handler", which is a part of run-time system. 
+	**=> upon exception, the run-time system searches for all methods on the callstack 
+		and if it couldn't find the appropriate handler (catch block) then the 
+		run-time system handovers the exception object to "Default Exception Handler",
+		 which is a part of run-time system. 
 
-	**=> this defalut exception handler prints exception information in some format and terminates the program abnormally.
+	**=> this defalut exception handler prints exception information in some format and 
+	      terminates the program abnormally.
 
 
 
@@ -148,15 +153,119 @@ how to handle exception
 				
 				//code to be monitored
 				//risky code 
-
+					//open a connection to the db/file ===SUCCESS
+					//perform some operations with the db/file ===> raise exception
+					
 			}catch(XXXXXException e){
 				//code to take corrective actions
 					//print/show appropriate message
 					//log the issue to the logger system
+
 			}finally{
 				//clean up code
 				//releasing the resources
+				
+				//close the db/file connection
 			}
+
+
+	**=> the finally block always executes irrespective of whether exception occures or not
+
+	**=> final, finally, finalize 
+
+			final keyword
+				- 'final' keyword is used to specify modifier, applicable for classees, methods and variables 
+					i.e. final class 	=   a final class cannot be subclassed 
+						 final method 	=	a final method cannot be overridden in subclass 
+						 final variables= 	a final variable cannot be re-assigned 
+
+
+			finally block 
+				- 'finally' is a block always associated with try-catch to maintain clean up code		
+				- 
+
+			finalize() method 
+				- finalize() method belongs to object class 
+				- finalize() method is called by GC just before the object is destroyed 
+				- once finalize() method completes, the GC destroys the object
+				- you may use this method to write some clean-up code  before the objects gets deleted
+
+		**=> an object is said to be eligible for garbage collection if it is unreachable 
+		**=> how to make objects eligible for GC		
+				- nullifying the refereneces 
+				- object created inside the method 
+		**==>once we make an object eligible for GC, GC may not destroy it immeidately
+		**=> JVM runs Garbage Collection, then only the objects will be destroyed 
+		**=> you can request the JVM to run Garbage Collection, using 
+				System.gc()
+
+
+
+	Possible combinations
+	------------------------------
+			try{
+			}finally{}
+
+			try{
+			}
+			catch{X x}
+
+			try{
+			}catch(X x){
+			}finally{}
+
+			try{
+			}catch(X x){
+			}catch(Y y){
+			}
+			finally{}
+
+Common Exceptions
+-----------------------------
+
+	ArrayIndexOutOfBoundsException
+		-> it is unchecked exception 
+		-> raised by JVM whenever you try to access array index out of range
+
+	NullPointerException
+		-> it is unchecked exception 
+		-> raised by JVM whenever you try to call a method on null reference 
+
+	ClassCastException
+		-> it is unchecked exception 
+		-> raised by JVM whenever we try to perform type casting from parent to child 
+
+	NoClassDefFoundError
+		-> it is unchecked exception 
+		-> raised by JVM whenever it is unable to find required .class file 
+
+	IllegalArgumentException
+		-> it is unchecked exception 
+		-> raised explicitely by the programmer or developer to indicate that a method invoked with illegal argument 
+
+	NumberFormatException
+
+	IllegalStateException
+		-> raised explicitely by the programmer or developer to indicate that a method has been invoked at wrong time
+
+
+	**=> Java 7 enhancement on exceptions 
+
+			**=> try with resources 
+					try(BufferedReader reader  = new BufferedReader(new FileReader("demo.txt"))) {
+						//perform some operations on the file demo.txt 
+						//if any exception...
+					}catch (Exception ex) {
+						ex.printStackTrace();
+					} 
+
+			**=> the resources which are opened as part of try block, will be closed automatically
+					we are not required to close resources explicitely
+					i.e. finally block is not required
+
+			**=> all the resources must be "AutoClosable"
+			**=> all network, database, file IO related resources are AutoClosable, means they have implementd "AutoClosable" interface 
+			
 
 
 

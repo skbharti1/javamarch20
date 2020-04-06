@@ -19,14 +19,12 @@ public class ExceptionDemo2 {
 			 System.out.println("result = " + result);
 			 
 		 }catch(InputMismatchException ex) {
-			 
 			 System.out.println("Invalid input");
 			 ex.printStackTrace();
-			 
 		 }catch (ArithmeticException ex) {
-			 
 			 System.out.println("cannot divide a number by 0");
 			 ex.printStackTrace();
+		}catch (Exception e) {
 			 
 		}
 		 
