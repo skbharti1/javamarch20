@@ -265,20 +265,32 @@ Common Exceptions
 
 			**=> all the resources must be "AutoClosable"
 			**=> all network, database, file IO related resources are AutoClosable, means they have implementd "AutoClosable" interface 
-			
+
 
 
 
 	2. using 'throws' keyword
+		-> it is used to declare an exception to be thrown and handled by jvm
+		-> you want to avoid writing the try-catch block, then you can use 'throws' keyword, 
+				and declare that jvm should handle the expception as per the default exception mechanism 
+		-> using 'throws' keyword we delegate the responsibility to handle the exception to JVM or the method 
+		-> it is used with checked exceptions 
+
+
 	3. usine 'throw' keyword
-
-
+			*=> 'throw' keyword to explicitely throw an exception from a method or any block 
+			*=> we can throw both types i.e. checked and unchecked expceptions 
 
 
 *************************************************************************
 
 
+===========================
+**==> Exception propagation
 
+
+
+==========================
 
 
 
@@ -596,7 +608,7 @@ Java 7 enhancements
 		}
 
 
-Input / Output | IO Pacakge
+Input / Output | java.io package
 -----------------------------------
 
 	-> java uses the concept of "Streams" to perform input/output operations
@@ -604,6 +616,8 @@ Input / Output | IO Pacakge
 	-> "stream" is simply sequence of bytes 
 
 	-> java.io package provides diff classes which represent diff kind of "Streams"
+			i.e. InputStream   and 	OutputStream 
+
 
 		1. open the "Stream"
 		2. perform i/o operations using "Stream"
@@ -668,16 +682,16 @@ Input / Output | IO Pacakge
 Character Based Stream Classes
 --------------------------------
 
-	Reader				Writer
-	  |				  |
-	  |-->InputStreamReader		  |-->InputStreamWriter
-	  |	|->FileReader		  |	|->FileWriter	
-	  |				  |
-	  |-->BufferedReader		  |->BufferedWriter
-	  |				  |
-	  |-->FilterReader		  |->FilterWriter
-	  |				  |
-	  |-->PipedReader		  |->PipedWriter
+	Reader								Writer
+	  |				  					|
+	  |-->InputStreamReader		  		|-->InputStreamWriter
+	  |		|->FileReader		  		|	|->FileWriter	
+	  |				  					|
+	  |-->BufferedReader		  		|->BufferedWriter
+	  |				  					|
+	  |-->FilterReader		  			|->FilterWriter
+	  |				  					|
+	  |-->PipedReader		  			|->PipedWriter
 	  |
 	  |-->
 	  |
