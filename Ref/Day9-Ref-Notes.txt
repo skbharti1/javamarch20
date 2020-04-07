@@ -736,20 +736,22 @@ BufferedReader and BufferedWriter
 Byte Based Stream classes
 --------------------------------------------
 
-	InputStream				OutputStream
-		|					|
-		|->FileInputSteam			|->FileOutputStream
-		|					|
+	InputStream							OutputStream
+		|								|
+		|->FileInputSteam				|->FileOutputStream
+		|								|
 		|->FilterInputStream			|->FilteroutputStream
 		|	|->BufferedInputStream		|	|->BufferedOutputStream
-		|	|->DataInputStream		|	|->DataOutputStream
+		|	|->DataInputStream			|	|->DataOutputStream
 		|->ObjectInputStream			|->ObjectOutputStream
 
 
 
 FileInputStream and FileOutputStream
 -----------------------------------------
-
+	- perform read/write operations based on bytes
+	- reads/writes 1 byte at a time 
+	- mostly used to perform IO operations on non-text files 
 
 
 BufferedInputStream and BufferedOutputStream
@@ -759,6 +761,7 @@ BufferedInputStream and BufferedOutputStream
 
 DataInputStream and DataOutputStream
 ------------------------------------------
+	- used to read/write binary data in the form of primitives,strings to the file
 
 
 ObjectInputStream and ObjectOutputStream
