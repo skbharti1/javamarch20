@@ -136,14 +136,13 @@ Advantages of concurrency
 	- allow to have high responsiveness 
 	- leads to more appropriate structure, as many problems can be solved by using concurrent threads 
 
-
-
 challenges of concurrency
 	- how to ensure data consistency as multiple threads can read/write shared data concurrently 
 	- how to avoid deadlock, livelock, starvation 
 
 
-**=> JVM runs inside a single process on the host operating system, all java programs are always started by a thread - the main thread
+**=> JVM runs inside a single process on the host operating system, 
+     all java programs are always started by a thread - the main thread
 
 
 
@@ -173,8 +172,9 @@ Sychronized keyword
 			block which is accessed by mutiple threads
 
 
-Concurrency API (java.util.concurrent)
-------------------------------------------------
+Concurrency API (java.util.concurrent) / Concurrent Collections
+----------------------------------------------------------------------
+
 
  
 How to create a new thread
@@ -196,12 +196,26 @@ How to create a new thread
 
 	2. by implementing Runnable interface 
 
-		class MyRunnable implements Runnable {
+		class MyRunnable1 implements Runnable {
 			
 			public void run() {
 
 			}
 		}
+
+		class MyRunnable2 implements Runnable {
+			
+			public void run() {
+
+			}
+		}
+
+
+		MyRunnable1 runnable = new MyRunnable1();
+		Thread t1 = new Thread(runnable);
+		t1.start();
+
+
 
 
 Thread class constructors
@@ -222,20 +236,24 @@ How to pause a thread
 	*==> you can't pause a thread from another thread
 	*==> only the thread itself can pause its execution
 
-	*==> a sleeping thread can be interrupted by another thread
+
 
 
 How to interrupt a thread
 -----------------------------
 
 	t1.interrupt()
-
+	
+	*==> a sleeping thread can be interrupted by another thread
 	-> we can stop or resume the execution of a thread 
 
 
-How to make a thread wait for other thread
+How to make a thread wait for other thread / join() 
 -------------------------------------------------
+	- a thread can join another thread, in case you want the current thread to wait for another thread to compete its exection 
+		once the other thread completes the execution, the current thread continues 
 
+		t1.join();
 
 
 
