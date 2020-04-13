@@ -152,6 +152,35 @@ Data Types
 
 		9. boolean endsWith(String s)
 
+StringBuilder
+---------------------
+	- we can create mutable strings 
+
+	StringBuilder sb = new StringBuilder("Welcome");		//Welcome
+
+	sb.append(" to java");		// Welcome to java
+
+	//sb.delete(7,10);
+
+	sb.insert(0, "helloworld");		//helloworld welcome to java
+
+	append(String s)
+	insert(int index, String s)
+	replace(int start, int end, String s)
+	delete(int startIndex, int endIndex)
+
+StringBuffer 
+----------------------
+	- we can create mutable strings
+	- StringBuffer is thread-safe / synchronized 
+
+
+	append(String s)
+	insert(int index, String s)
+	replace(int start, int end, String s)
+	delete(int startIndex, int endIndex)
+
+
 ==>Scanner class
 ------------------------
 	
@@ -188,12 +217,13 @@ Data Types
 
 	System.in
 	--------------
-		-  'in' is an object of type InputStream, and it represents ref to the 			'standard inputstream'
+		-  'in' is an object of type InputStream, and it represents ref to the 
+				'standard inputstream'
 
 	class System {
 
-		static PrintStream out;
-		static InputStream in;
+		static PrintStream out;	//represents the standard outputstream 
+		static InputStream in;	// represents the standard inputstream 
 
 	}
 

@@ -9,8 +9,6 @@
 	-> override 'compare(Object o1, Object o2)
 	-> create external comparators 
 
-
-
 *==>contracts
 ---------------
 
@@ -27,24 +25,249 @@
 	=> why HashMap allows one null key
 
 	=> how HashMap works internally
+============================================================
 
+
+Set Interface
+----------------------
+	- subinterface of Collection interface 
+	- it models a collection of objects where each element is unique 
+		ie. doesn't allow duplicate values 
+	**=> HashSet and LinkedHashSet can have one null value
+	**=> null values cannot be stored on treeset
+	**=> all the implementations of Set are not synchronized
+
+
+				Collection <-----------add()
+				    |
+		----------------------------------------------------
+		List		Set								Queue
+		  |			 |
+					 |
+			    --------------------------------------------
+			    HashSet						TreeSet
+				     |
+			  LinkedHashSet
+
+HashSet
+	- uses 'hashtable' as data structure 
+	- doesnt guarantee the order of insertion 
+	- it stores information by using a mechanism called hashing. 
+		i.e.the informational content of a key is used to determine a unique 			value, called its hash code
+
+LinkedHashSet
+	- it uses 'hashtable + double linked list' as data structure 
+	- ensures the order of insertion 
+
+TreeSet
+	- it uses 'balanced tree' as data structure
+	- it maintains sorted order of elements according to their natural ordering
 
 	
-============================================================
+
+Creating a Set
+-----------------------
+
+	Set set = new HashSet();
+	Set set = new LinkedHashSet();
+	Set set = new TreeSet();
+
+	Set<String> namesSet = new HashSet<>();
+
+	Set<String> namesSet = new LinkedHashSet<>();
+
+	Set<String> namesSet = new TreeSet<>();
+
+Basic operations 
+
+	1. adding an element 
+
+		boolean add(Object o)
+		boolean addAll(Collection c)
+
+	2. removing an element
+
+		boolean remove(Object o)
+			**-> it internally uses equals() method to compare the given 				object with all other objects
+			**-> if you have a collection of custom objects i.e. Employee 				etc.make sure that, the equals() and hashCode() 				method implemented correctly
+
+	3. check the set if empty
+		
+		boolean isEmpty()
+
+	4. iterate over a set collection
+
+	5. Searching an element 
+
+			boolean contains(Object o)
+
+
+	*=> whenever we use any hashtable based collection, for storing custom objects, make sure you correctly override equals() and hashCode() methods
+
+
+
+**=> Even if ArrayList & LinkedList are not synchronized, we can use them in concurrent programs/multithreaded programs**
+
+		using Collections.synchronizedList()
+
+**=> Even if HashSet, LinkedHashSet & Tree are not synchronized, we can use them in concurrent programs/multithreaded programs
+
+		using Collections.synchronizedSet()
+
+
+equals() and hashCode()
+------------------------------
+	- override equals() method 
+	**=> whenever we override equals() method, we must override the hashCode() as well
+
+	**=> if two objects are equal(according to the implementations of equals() method),
+			their hashcode must be equals
+	**=> if two objects are not same, there is no constraint on their hashcode, they may be same
+
+	**=> if two objects have identical hashcode, there is no constraint on their equality 
+
+	**=> if two object have diff hashcode, they must not be equal
+
+
+how HashSet internally works
+---------------------------------------
+	**=> uses HashMap internally to store objects 
+
+Sorting the collection
+---------------------------------
+
+	1. sort a list 
+
+			Collections.sort(List list);
+
+
+	sort a list of numbers ====> alphanumeric
+	sort a list of strings ====> alphabetic
+	sort a list of dates ===== chronological 
+
+
+	**=> Natural ordering is the default ordering of objects of a specific type 
+			when they are sorted in array/collection
+
+
+Comparable interface 
+--------------------------
+	-> java.util package provides 'Comparable' interface to define natural ordering of a class
+	-> to specify the natural ordering, you can implement Comparable interface
+
+
+		interface Comparable<E>{
+			public abstract int compareTo(Object o)
+		}
+
+		class Employee implements Comparable{
+
+				//properites
+				//constructor
+				//getter/setter methods
+				//override equals() and hashCode()
+				//override toString()
+
+				//override the compareTo() method of comparable interface
+				public int compareTo(Object obj){
+						Employee other = (Employee)obj;
+						
+				}
+		}
+
+		Collections.sort(empList)
+
+	comparevalue
+	--------------------
+
+		>0	: this object is greater than other
+
+		<0	: this object is less than other
+
+	
+		=0	: both objects are same
+
+		e1 		e2		e3		e4		e5
+	     |		|
+
+		Collections.sort(emplist)
+				e1.compareTo(e2)
+
+
+
+Comparator interface 
+--------------------------
+	-> java.util package provides the Comparable interface 
+	-> used to create exeternal comparators 
+
+		interface Comparator<E> {
+			public abstract int compare(Object o1, Object o2);
+		}
+
+
+
+		class EmpIdComparator implements Comparator<Employee>{
+			//override
+			public int compare(Employee e1, Employee e2){
+				//logic to compare....
+			}
+		}
+
+
+
+TreeSet
+------------------
+
+		class Employee implements Comparable<Employee>{
+			public int compareTo(Employee other){
+				//logic 
+			}
+		}
+		Set<Employee> empSet = new TreeSet<>();
+
+		**=> if you want to create a treeset of custom objects, make sure that it defines 
+				natural ordering either by implementing Comparator interface or provide appropriate
+				Comparator at the time of constructing TreeSet
+
+
+		class Employee {
+			 
+		}
+
+		class EmpSalaryComparator implements Comparator<Employee>{
+			public int compare(Employee e1, Employee e2){
+				//logic 
+			}
+		}
+
+		Set<Employee> empSet = new TreeSet<>(new EmpSalaryComparator());
+
+		Set<Employee> empSet = new TreeSet<>(new EmpIdComparator());
+
+
+
+		Set set = new TreeSet(); //perform only basic operations 
+
+		SortedSet set = new TreeSet(); //perform additional operations such as rangeview
+
+		NavigableSet set = new TreeSet();
+
+
+
 
 
 
 		Collection<E> (i)
 			|
     ----------------------------------------------------------------
-    |				|				|
- List<E> (i)  		      Set<E> (i)		     Queue <E> (i)
-    |				|			 	|
-ArrayList<E>		    HashSet<E>			-------------------
-LinkedList<E>		    LinkedHashSet<E>		|		  |
-Vector<E>		    TreeSet<E>		      Deque<E>(i)    BlockingQueue<E>(i)
-Stack<E>						|
-						    BlockingDeque<E>(i)
+    |				|					|
+ List<E> (i)  	Set<E> (i)		     Queue <E> (i)
+    |				|			 		|
+ArrayList<E>	HashSet<E>			---------------------
+LinkedList<E>	LinkedHashSet<E>		|		  		|
+Vector<E>		TreeSet<E>		      Deque<E>(i)    BlockingQueue<E>(i)
+Stack<E>								|
+						    	BlockingDeque<E>(i)
 
 
 	set.add(10);
@@ -66,7 +289,6 @@ Map<K,V> Interface
 -------------------------------
 
 	-> models a collection of objects, stored using key-value pairs 
-
 	-> doesn;t allow duplicate keys 
 
 		name-address
@@ -100,9 +322,13 @@ Map<K,V> Interface
 	Set<Map.Entry<K,V>> entrySet()
 
 
-
-
-
+					Map<K,V> 
+					  |
+					  |
+	------------------------------------------------------
+	HashTable 		HashMap 			TreeMap
+					   |
+					LinkedHashMap
 
 
 Implementation classes of Map interface
@@ -112,7 +338,7 @@ Implementation classes of Map interface
 
 		-> doesn;t allow null key
 		-> doesn;t maintain order of insertion
-		-> uses 'hashtable' datastructure
+		-> uses 'hashtable' data structure
 		-> it is synchronized 
 			(all methods in HashTable class are synchronized)
 		
@@ -140,89 +366,6 @@ Implementation classes of Map interface
 		Map<Manager, List<Workers>> map = new TreeMap<>();
 
 
-==> Queue
--------------------
-
-	-> Queue interface models a collection of elements which supports FIFO approach
-
-	-> Queue has a head and tell, new elements are added to the tail, and to-be processed 			elements are picked/removed from the head
-	
-	-> Deque models a queue collection, but it is double headed
-
-	-> BlockingQueue is a capacity based queue
-
-			Queue<E>
-			  |
-		   -------------------------
-		   |			  |
-		 Deque<E>		BlockingQueue<E>
-		  |
-	     BlockingDeque<E>
-		
-
-Implementation classes of Queue
--------------------------------------
-
-	=> General purpose implementations
-
-		LinkedList
-			-> maintains order of insertion
-
-		PriorityQueue
-			-> maintains sorted order of elements 
-
-		ArrayDeque
-			-> double ended queue
-
-	=> Concurrent implementations
-
-		ArrayBlockingQueue
-	
-		PriorityBlockingQueue
-
-		DelayQueue
-
-
-
-Operations of Queues
--------------------------------
-
-	Queue interface methods
-	-----------------------------------
-
-	insert		: add(e)		offer(e)
-
-	remove		: remove()		poll()
-
-	examine 	: element()		peek()
-
-
-	Deque interface methods
-	-----------------------------------
-
-	insert		: add(e)		offer(e)
-			  addFirst(e)		offerFirst(e)
-			  addLast(e)		offerLast(e)	
-	
-
-	remove		: remove()		poll()
-			  removeLast()		pollLast()
-			  removeFirst()		pollFirst()
-
-	examine 	: element()		peek()
-			  getFirst()		peekFirst()
-			  getLast()		peekLast()
-
-	
-
-	BlockingQueue interface methods
-	-----------------------------------
-
-	insert		: add(e)		offer(e)	put(e)
-
-	remove		: remove()		poll()		take(e)
-
-	examine 	: element()		peek()
 
 
 
@@ -232,4 +375,4 @@ Operations of Queues
 
 
 
-
+Map<KEY, VALUE> tmap = new TreeMap<>();

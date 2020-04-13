@@ -19,7 +19,7 @@ Byte based stream classes
 ------------------------------------
 
 FileInputStream	and FileOutputStream
-
+	- reads/writes 1 byte at a time 
 
 BufferedInputStream and BufferedOutputStream
 
@@ -45,20 +45,56 @@ ObjectInputStream and ObjectOutputStream
 
 *=> Serialization
 ------------------------------
-	-> Serialization is the process of converting an object into sequence of 		bytes
+	-> Serialization is the process of converting an object into sequence of bytes
 	-> it converts state of an object into byte stream
 
-	-> to make an object serializable, we need to implmenet "Serializable" 				interface
+			class Employee implements Serializable{
+
+			}
+
+	-> to make an object serializable, we need to implmenet "Serializable" interface
+
+	-> All subtypes of a serializable class are themselves serializable
+			i.e. if a parent class has implemeted Serializable interface, then child class doesn't need to implement 
+	-> only non-static data members are saved via Serialization
+	-> Static and transient data members are not saved via serialization 
+	-> constructor of the object is never called during Deserialization
+	-> Associated objects must also be Serializable	
 
 
 	-> Serializable is a "Marker interface"
+
+	**==> marker interface in java do not have any field/methods 
+			i.e. Serializable
+				  Closable
+				  Clonnable
+				  ThreadSafe
+	**=> Marker interfaces are used to indicate something to the compiler or JVM
+	**=> JVM performs some special operations based on the marker interface used on the class 
 
 		class XXXX implements Serializable {
 
 		}
 
+Deserialization
+----------------------------
+	-> reverse process, convert byte stream into actual java object 
+
+
 *=>SerialVersionUID
 -------------------------------
+
+
+Externilizable
+----------------------
+	-> it is subinterface of Serialzable interface 
+	-> provides a way to customize how an object is serialzied 
+
+	-> it has two methods		
+			void writeExternal(ObjetOutput o)
+			void readExternal(ObjectInput i)
+	-> if you want to control on how your objects shall be serialized/deserialized, 
+			i.e. if you want to ecrypt sensitive data before it is serialized
 
 
 
@@ -67,16 +103,47 @@ ObjectInputStream and ObjectOutputStream
 Multithreading / Multitasking
 -------------------------------
 
+
+Concurrency 
+------------------------
+	- ability to execute multiple tasks simultaneously
+	- every task is executed by a separate "thread"
+
+
+
 	-> executing several tasks simultaneously
 
 
 	1. process based multitasking
+		- each process has its own memory space and ressources which cannot be shared with each other	
+		- it is controlled at OS level
 
 
-
-	2. thread based multitasking
+	2. Thread based multitasking
+		-> inside one process, there can be multiple sub-processes
 		-> executing diff parts of the same process simultaneously
-		-> sub process / part 
+		-> sub process / parts are called as 'threads' 
+		-> threads can share same memory space/resources 
+
+		**=> concurrency / thread based multitasking is achieved by sharing CPU's process time amoung the threads		
+		**=> it uses the mechanism of time slicing 
+				i.e. CPU executes thread1 a little bit, then execute thread2 a little bit....
+		**=> the order of executed among threads is undetermined 
+
+Advantages of concurrency 
+	- concurrency makes software programs most efficient and robust
+	- increase performance and productivity 
+	- allow to have high responsiveness 
+	- leads to more appropriate structure, as many problems can be solved by using concurrent threads 
+
+challenges of concurrency
+	- how to ensure data consistency as multiple threads can read/write shared data concurrently 
+	- how to avoid deadlock, livelock, starvation 
+
+
+**=> JVM runs inside a single process on the host operating system, 
+     all java programs are always started by a thread - the main thread
+
 
 
 Thread Scheduler
@@ -87,11 +154,29 @@ Thread Scheduler
 main	t1	t2	t3	t4	t5
 
 
-Thread Class
+Thread Class 
+----------------------------------------
+	- the "Thread" class represents a "unit of execution"
+
+Runnable interface
+-------------------------
+	- A Runnable interface represents a task that can be executed inside a thread 
+
+Object class
+--------------
+	- wait(), notify(), notifyAll()
+
+Sychronized keyword
 -----------------------
+	- Sychronized keyword can be used to safeguard a variable/object/resource or a code 
+			block which is accessed by mutiple threads
 
 
+Concurrency API (java.util.concurrent) / Concurrent Collections
+----------------------------------------------------------------------
 
+
+ 
 How to create a new thread
 ---------------------------------
 
@@ -111,12 +196,26 @@ How to create a new thread
 
 	2. by implementing Runnable interface 
 
-		class MyRunnable implements Runnable {
+		class MyRunnable1 implements Runnable {
 			
 			public void run() {
 
 			}
 		}
+
+		class MyRunnable2 implements Runnable {
+			
+			public void run() {
+
+			}
+		}
+
+
+		MyRunnable1 runnable = new MyRunnable1();
+		Thread t1 = new Thread(runnable);
+		t1.start();
+
+
 
 
 Thread class constructors
@@ -137,20 +236,24 @@ How to pause a thread
 	*==> you can't pause a thread from another thread
 	*==> only the thread itself can pause its execution
 
-	*==> a sleeping thread can be interrupted by another thread
+
 
 
 How to interrupt a thread
 -----------------------------
 
 	t1.interrupt()
-
+	
+	*==> a sleeping thread can be interrupted by another thread
 	-> we can stop or resume the execution of a thread 
 
 
-How to make a thread wait for other thread
+How to make a thread wait for other thread / join() 
 -------------------------------------------------
+	- a thread can join another thread, in case you want the current thread to wait for another thread to compete its exection 
+		once the other thread completes the execution, the current thread continues 
 
+		t1.join();
 
 
 

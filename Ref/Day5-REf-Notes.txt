@@ -1,0 +1,131 @@
+Wrapper classes
+-----------------------
+
+    in java, each primitive type has a corresponding reference type.
+          i.e. java.lang.Integer class corresponds to primitive int type 
+
+    - these wrapper classes are immutable 
+
+    - whenever a primitive type needs to be treated as an Object 
+    - to provide some utility functions for primitives. 
+            i.e. wrapper classes provide functions for conversion 
+
+            Integer.parseInt("13")  
+
+
+    Primitive types             Refernce Types
+    -----------------           ---------------------
+    byte                        Byte 
+    short                       Short 
+    int                         Integer 
+    long                        Long
+    float                       Float 
+    double                      Double 
+    char                        Character
+    boolean                     Boolean 
+
+Boxing / autoboxing 
+
+    => conversion of a primitive type to the corresponding ref type 
+
+    int i = 20;
+    Integer intobj = new Integer(i);
+    Integer intobj = new Integer(34);
+    Object obj =  i;
+
+Unboxing 
+
+    => conversion of reference type to primitive tpye 
+
+            int a = (int)obj;
+
+----------------------------------------------------------------------------
+Basics/essentials of java language 
+    - variables
+    - data types
+    - decision making
+    - looping 
+    - OOPs concepts 
+    - classes / object 
+    - arrays 
+    - strings 
+
+
+
+language    packages/api/libraries              framework 
+
+java        collection framework       
+            IO
+            util 
+            lang 
+            .....
+
+Collection API
+--------------------------
+    -> it is a package/api/library in java
+            provides an architecture/pre-defined data strcutures  
+            to store and manipulate group of objects 
+
+    -> Arrays can be used to create of elelements/objects 
+            but.. arrays are fixed size 
+                array has a simple linear structure 
+
+    -> collection api provide dynamically allocated data structures such as ArrayList, LinkedList, HashSet etc. 
+    -> collection framework provides several Interfaces, classes 
+
+                Iterable {I}
+                    |
+                Collection<E> {I}                                          Map<K,V> {I}
+                    |                                                         |
+    --------------------------------------------                              |
+    List<E> {I}        Set<E> {I}        Queue<E> {I}                        HashMap<K,V> {C}
+      |                  |                     |                              LinkedHashMap<K,V> {C}
+  ArrayList<E> {C}     HashSet<E> {C}          |                              TreeMap<K,V> {C}
+  LinkedList<E> {C}    LinkedHashSet<E> {C}    |                              HashTable<K,V> {C} 
+  Vector<E> {C}        TreeSet<E> {C}          |
+  Stack<E> {C}                                 |
+                                -------------------------
+                                Deque<E> {I}           BlockingQueue<E> {I}
+                                  |                     |
+                            PriorityQueue<E> {C}       ArrayBlockingQueue<E> {C}
+                            ArrayDeque<E> {C}
+
+
+
+
+    Collection Interface 
+        - the supermost interface/ root interface  in Collection framework
+        - it defines some common functionalities expected of all classes 
+
+            i.e. boolean add(Object obj)
+                 boolean add(Collection c)
+                 boolean remove(Object obj)
+                 boolean removeAll(Collection c)
+                 int size()
+                 void clear()
+                 boolean contains(Object obj)
+
+    List Interface 
+        - List interface models an index-based collection of elements, which can contain duplicate elements 
+        - ArrayList, LinkedList, Vector and stack are the implementation classes of List interface 
+
+    Set Interface 
+        - Set interface model a collection of unique elements (duplicates are not allowed)
+        - HashSet, LinkedHashSet, TreeSet are the implementation classes of set interface 
+
+    Queue interface 
+        - models a collection of elements in the form a queue (FIFO)
+
+
+    Map interface 
+        - models a collection of key-value pairs 
+
+
+
+Generic Collection 
+    - all the items/elements in the collection are of same type 
+
+Non-Generic Collection
+    - all the items/elements in the collection are NOT of same type 
+
+

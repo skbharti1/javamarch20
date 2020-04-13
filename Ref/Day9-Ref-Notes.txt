@@ -5,6 +5,296 @@
 
 ===============================
 
+*************************************************************************
+
+Exception Handling
+----------------------------
+
+	**=>unwated/unexpected event, that disturbs the normal flow of the program is called Exception
+
+	**=> in java, Exception is a class, and the object of this class can represent information about an error, which occurs at runtime
+
+	1. compile time errors 
+		- missing semicolons
+		- imcompatible types
+		- misspelings of variables, identifiers
+		- use undeclared variables 
+
+	2. run time errors 
+		- wrong input
+		- physical failure i.e. disk failure/ network failure 
+		- wrong logic/code
+
+Exception handling
+----------------------------------
+
+1. find the problem (Hit the Exception)
+
+2. inform that an error has occured (throw Exception object)
+
+3. receive the error info (catch exception in catch block)
+
+4. take corrective actions (execute the code written in catch block)
+
+
+	-> the main method is executed inside a thread
+	-> for every thread JVM creates a runtime stack
+	-> every method call performed by that thread, will be stored in the 				corresponding stack (i.e. method, variables, ...)
+	-> during execution, if any unexpected event occurs at any point..
+		then, the method will create 'Exception Object' and it hands over 		that object to JVM
+	**-> JVM will then check, if that method contains any exception handling code, if yes, it passes the exception object to the corresponding code (catch block), otherwise it terminates the caller method and removes the entry from the stack and the program will be stopped abnormally. 
+
+understand the "Exception" object
+-----------------------------------------
+
+
+							Throwable
+			    				|
+ 	----------------------------------------------------------------------
+	Error														Exception 
+	  |															    |
+--------------------------------------------------					|
+VirtualMachineError    LinkageError     AssertionError				|
+ 	|													 			| 
+OutOfMemoryError													|
+StackOverFlowOver		  											|
+			-----------------------------------------------------------------------------------------------
+			RuntimeExpcetion				IOException			SQLException	 InterrupedExeption
+			  |
+			NullPointerException
+			ArithmaticException
+			ArrayIndexOutofBoundsException
+			IllegalArgumentException
+			ClassNotFoundException
+			IllegalStateException		
+					|->IllegalThreadStateException
+					|->IllegalMonitorStateException
+			..
+			...
+
+
+	**=> "Error" class describes internal errors 
+		i.e. VirtualMachineError, LinkageError, Memory related errors
+	**=> Error class indicates some serious problems, the app cannot handle these 		errors
+	**=> Exceptions can be handled 
+
+
+	**=> in java, Execeptions are objects, when you throw an exception, you are 		throwing an object
+
+
+Default Exception handling
+------------------------------------
+
+	**=> upon exception, the run-time system searches for all methods on the callstack 
+		and if it couldn't find the appropriate handler (catch block) then the 
+		run-time system handovers the exception object to "Default Exception Handler",
+		 which is a part of run-time system. 
+
+	**=> this defalut exception handler prints exception information in some format and 
+	      terminates the program abnormally.
+
+
+
+Checked and Unchecked exceptions
+----------------------------------------
+
+Checked Expception
+-------------------
+	-> the excecptions which are checked by the compiler, which ensure you have appropriate handlers to handle the exceptions 
+	-> you must handle the checked exceptions at your own
+
+	**=> all the exceptions except RuntimeException are checked exceptions 
+			i.e. IOException, SQLException, etc. 
+
+Unchecked exceptions
+-----------------------------------
+	-> are not essentially handled in the program
+	-> if you don't have appropriate handlers
+		 - JVM will handle it by default using the "Default Exception handling"
+
+	- i.e. RuntimeException
+
+
+
+
+how to handle exception
+----------------------------------
+	1. using try-catch block
+
+		try {
+			//statement 1
+			
+			//statement 2
+			
+			//statement 3
+			
+		}catch(XXXXException e) {
+			//statment 4
+		}
+		
+		//statement 5
+
+	**==> CASE 1: if there are no exceptions
+				1, 2, 3, 5
+
+	**=> CASE 2: if an exception raised at statement 2 which matches to XXXXException
+				1, 4, 5
+				and program terminates normally
+
+	**==> CASE 3: if an exception raised at statement 2 which doesn't match to XXXXException
+				1
+				followed by abnormal termination
+
+
+
+	2. using try-catch-finally 
+
+			try{
+				
+				//code to be monitored
+				//risky code 
+					//open a connection to the db/file ===SUCCESS
+					//perform some operations with the db/file ===> raise exception
+					
+			}catch(XXXXXException e){
+				//code to take corrective actions
+					//print/show appropriate message
+					//log the issue to the logger system
+
+			}finally{
+				//clean up code
+				//releasing the resources
+				
+				//close the db/file connection
+			}
+
+
+	**=> the finally block always executes irrespective of whether exception occures or not
+
+	**=> final, finally, finalize 
+
+			final keyword
+				- 'final' keyword is used to specify modifier, applicable for classees, methods and variables 
+					i.e. final class 	=   a final class cannot be subclassed 
+						 final method 	=	a final method cannot be overridden in subclass 
+						 final variables= 	a final variable cannot be re-assigned 
+
+
+			finally block 
+				- 'finally' is a block always associated with try-catch to maintain clean up code		
+				- 
+
+			finalize() method 
+				- finalize() method belongs to object class 
+				- finalize() method is called by GC just before the object is destroyed 
+				- once finalize() method completes, the GC destroys the object
+				- you may use this method to write some clean-up code  before the objects gets deleted
+
+		**=> an object is said to be eligible for garbage collection if it is unreachable 
+		**=> how to make objects eligible for GC		
+				- nullifying the refereneces 
+				- object created inside the method 
+		**==>once we make an object eligible for GC, GC may not destroy it immeidately
+		**=> JVM runs Garbage Collection, then only the objects will be destroyed 
+		**=> you can request the JVM to run Garbage Collection, using 
+				System.gc()
+
+
+
+	Possible combinations
+	------------------------------
+			try{
+			}finally{}
+
+			try{
+			}
+			catch{X x}
+
+			try{
+			}catch(X x){
+			}finally{}
+
+			try{
+			}catch(X x){
+			}catch(Y y){
+			}
+			finally{}
+
+Common Exceptions
+-----------------------------
+
+	ArrayIndexOutOfBoundsException
+		-> it is unchecked exception 
+		-> raised by JVM whenever you try to access array index out of range
+
+	NullPointerException
+		-> it is unchecked exception 
+		-> raised by JVM whenever you try to call a method on null reference 
+
+	ClassCastException
+		-> it is unchecked exception 
+		-> raised by JVM whenever we try to perform type casting from parent to child 
+
+	NoClassDefFoundError
+		-> it is unchecked exception 
+		-> raised by JVM whenever it is unable to find required .class file 
+
+	IllegalArgumentException
+		-> it is unchecked exception 
+		-> raised explicitely by the programmer or developer to indicate that a method invoked with illegal argument 
+
+	NumberFormatException
+
+	IllegalStateException
+		-> raised explicitely by the programmer or developer to indicate that a method has been invoked at wrong time
+
+
+	**=> Java 7 enhancement on exceptions 
+
+			**=> try with resources 
+					try(BufferedReader reader  = new BufferedReader(new FileReader("demo.txt"))) {
+						//perform some operations on the file demo.txt 
+						//if any exception...
+					}catch (Exception ex) {
+						ex.printStackTrace();
+					} 
+
+			**=> the resources which are opened as part of try block, will be closed automatically
+					we are not required to close resources explicitely
+					i.e. finally block is not required
+
+			**=> all the resources must be "AutoClosable"
+			**=> all network, database, file IO related resources are AutoClosable, means they have implementd "AutoClosable" interface 
+
+
+
+
+	2. using 'throws' keyword
+		-> it is used to declare an exception to be thrown and handled by jvm
+		-> you want to avoid writing the try-catch block, then you can use 'throws' keyword, 
+				and declare that jvm should handle the expception as per the default exception mechanism 
+		-> using 'throws' keyword we delegate the responsibility to handle the exception to JVM or the method 
+		-> it is used with checked exceptions 
+
+
+	3. usine 'throw' keyword
+			*=> 'throw' keyword to explicitely throw an exception from a method or any block 
+			*=> we can throw both types i.e. checked and unchecked expceptions 
+
+
+*************************************************************************
+
+
+===========================
+**==> Exception propagation
+
+
+
+==========================
+
+
+
+
 
 Exception Handling
 -----------------------------------
@@ -318,7 +608,7 @@ Java 7 enhancements
 		}
 
 
-Input / Output | IO Pacakge
+Input / Output | java.io package
 -----------------------------------
 
 	-> java uses the concept of "Streams" to perform input/output operations
@@ -326,6 +616,8 @@ Input / Output | IO Pacakge
 	-> "stream" is simply sequence of bytes 
 
 	-> java.io package provides diff classes which represent diff kind of "Streams"
+			i.e. InputStream   and 	OutputStream 
+
 
 		1. open the "Stream"
 		2. perform i/o operations using "Stream"
@@ -390,16 +682,16 @@ Input / Output | IO Pacakge
 Character Based Stream Classes
 --------------------------------
 
-	Reader				Writer
-	  |				  |
-	  |-->InputStreamReader		  |-->InputStreamWriter
-	  |	|->FileReader		  |	|->FileWriter	
-	  |				  |
-	  |-->BufferedReader		  |->BufferedWriter
-	  |				  |
-	  |-->FilterReader		  |->FilterWriter
-	  |				  |
-	  |-->PipedReader		  |->PipedWriter
+	Reader								Writer
+	  |				  					|
+	  |-->InputStreamReader		  		|-->InputStreamWriter
+	  |		|->FileReader		  		|	|->FileWriter	
+	  |				  					|
+	  |-->BufferedReader		  		|->BufferedWriter
+	  |				  					|
+	  |-->FilterReader		  			|->FilterWriter
+	  |				  					|
+	  |-->PipedReader		  			|->PipedWriter
 	  |
 	  |-->
 	  |
@@ -444,20 +736,22 @@ BufferedReader and BufferedWriter
 Byte Based Stream classes
 --------------------------------------------
 
-	InputStream				OutputStream
-		|					|
-		|->FileInputSteam			|->FileOutputStream
-		|					|
+	InputStream							OutputStream
+		|								|
+		|->FileInputSteam				|->FileOutputStream
+		|								|
 		|->FilterInputStream			|->FilteroutputStream
 		|	|->BufferedInputStream		|	|->BufferedOutputStream
-		|	|->DataInputStream		|	|->DataOutputStream
+		|	|->DataInputStream			|	|->DataOutputStream
 		|->ObjectInputStream			|->ObjectOutputStream
 
 
 
 FileInputStream and FileOutputStream
 -----------------------------------------
-
+	- perform read/write operations based on bytes
+	- reads/writes 1 byte at a time 
+	- mostly used to perform IO operations on non-text files 
 
 
 BufferedInputStream and BufferedOutputStream
@@ -467,6 +761,7 @@ BufferedInputStream and BufferedOutputStream
 
 DataInputStream and DataOutputStream
 ------------------------------------------
+	- used to read/write binary data in the form of primitives,strings to the file
 
 
 ObjectInputStream and ObjectOutputStream

@@ -1,0 +1,87 @@
+
+
+==> Queue
+-------------------
+
+	-> Queue interface models a collection of elements which supports FIFO approach
+
+	-> Queue has a head and tell, new elements are added to the tail, and to-be processed 			elements are picked/removed from the head
+	
+	-> Deque models a queue collection, but it is double headed
+
+	-> BlockingQueue is a capacity based queue
+
+		   Collection <---- root interface who describes some common methods //add()
+			  |					
+			Queue<E> <---- offer()
+			  |
+		   -------------------------
+		   |			  |
+		 Deque<E>		BlockingQueue<E>
+		  |
+	     BlockingDeque<E>
+		
+
+Implementation classes of Queue
+-------------------------------------
+
+	=> General purpose implementations
+
+		LinkedList
+			-> maintains order of insertion
+
+		PriorityQueue
+			-> maintains sorted order of elements 
+
+		ArrayDeque
+			-> double ended queue
+
+	=> Concurrent implementations
+
+		ArrayBlockingQueue
+	
+		PriorityBlockingQueue
+
+		DelayQueue
+
+
+
+Operations of Queues
+-------------------------------
+
+	Queue interface methods
+	-----------------------------------
+
+	insert		: add(e)		offer(e)
+
+	remove		: remove()		poll()
+
+	examine 	: element()		peek()
+
+
+	Deque interface methods
+	-----------------------------------
+
+	insert		: add(e)		offer(e)
+			  addFirst(e)		offerFirst(e)
+			  addLast(e)		offerLast(e)	
+	
+
+	remove		: remove()		poll()
+			  removeLast()		pollLast()
+			  removeFirst()		pollFirst()
+
+	examine 	: element()		peek()
+			  getFirst()		peekFirst()
+			  getLast()		peekLast()
+
+	
+
+	BlockingQueue interface methods
+	-----------------------------------
+
+	insert		: add(e)		offer(e)	put(e)
+
+	remove		: remove()		poll()		take(e)
+
+	examine 	: element()		peek()

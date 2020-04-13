@@ -5,10 +5,14 @@
 
 -> string object capacity & memory size
 
--> the default implementation of toString() in Object class
-
 -> multidimensional ararys / two dim arrays 
 
+-> how to sort array values in descending order 
+
+-> the default implementation of toString() in Object class
+
+
+e3
 
 -> Observe sorting array of custom objects i.e. Employee type array
 
@@ -35,8 +39,7 @@ StringBuilder
 		.....
 
 	-> .insert(int index, String s)
-		-> 
-
+	
 		sb.insert(0, "hi ");		//sb => hi welcome
 
 	-> .replace(int startIndex, int endIndex, String str)
@@ -48,6 +51,60 @@ StringBuffer
 -------------------
 	- similar to StringBuilder
 	- it is synchronized / thread safe
+
+
+Arrays
+----------------------
+
+	int a = 10;	//
+	int b = 20; //
+
+
+	Array = indexed collection of "fixed number" of homogeneous data elements 
+			= Array in java is "fixed size collection" of elements 
+			= Arrays are objects in java 
+
+
+	Array Declaration 
+	-------------------------
+		<datatype>[] arrayname; 
+
+		int[] nums; 		//declars an array of type int 
+		int []nums;
+		int nums[];
+		int [] nums;
+
+	Create Array object
+	----------------------
+		arrayname = new <datatype>[size];
+
+		nums = new int[-5];
+
+
+	Initialize values for array elements 	
+	----------------------------------------------
+		nums[0] = 20;
+
+
+
+		**=> at the time of array craetion we must specify array size, otherwise compile error 
+		**=> we can have 0 sized array 
+		**=> if the size is negative, then it throws runtime exeption NegativeArraySizeException
+		**=> the allowed types to specify size are byte, short, char, int
+		**=> the max size can be 2147483647 
+
+
+	java.util.Arrays class
+	------------------------------
+		sort(): sorts an array into ascending order, according to "natrual ordering of elements"
+
+		Array of numbers === alphanumeric
+		Array of Strings === alphabetic
+		Array of Dates ==== chronological 
+
+
+
+
 
 
 Object class
