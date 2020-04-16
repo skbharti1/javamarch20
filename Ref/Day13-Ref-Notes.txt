@@ -47,6 +47,100 @@ Solutions to these problems are....
 	-> hides the complexity to deal with sql and low level jdbc api
 	-> it writes the sql and jdbc code for you...
 
+
+
+
+	JDBC is a specification (set of requirements)
+		- JDBC api / specification is implemented by nearly all the database vendors or some 3rd party 			vendors	
+
+	ORM tools/library (Object Relational mapping)
+	-------------------------------------------
+
+		- ORM refers to the technique of mapping the representations of data from java objects to relational 			database and vise versa
+		- ORM allows mapping the POJOs and relational database tables
+		- this mapping is done through xml configuration or annotations
+		- ORM hides the complexity to deal with sql and low level jdbc api
+
+		- hibernate
+		- toplink
+	
+	Object persisitence
+	-----------------------------
+		- state of an object can be stored in database, and can be re-created at a later point 
+		- you can persist the data(objects) into any db/files
+
+
+		class Employee{
+
+		}
+
+	JPA - Java Persistence API
+	---------------------------------------
+		- JPA is a specification
+		- it is a standard
+		
+		- JPA providers
+			- hibernate jpa
+			- toplink - eclipselink
+			- openjpa
+
+
+1. create JPA project / convert existing project to JPA
+	-> persistence.xml
+		-> it is a configuration file for JPA
+
+2. define a persistence unit 
+	- defines standard properties to communicate with db
+	- defines "entities" to be persisted and how to persist
+
+
+	persistence.xml
+	-------------------
+	<persistence>
+		<persistence-unit name="pu1">
+
+
+			<properties>
+				//define standard properties 
+			<property name="javax.persistence.jdbc.driver" value="" />
+			<property name="javax.persistence.jdbc.url" value="" />
+			<property name="javax.persistence.jdbc.user" value="" />
+			<property name="javax.persistence.jdbc.password" value="" />
+			</properties>
+	
+		</persistence-unit>
+		
+	</persistence>
+
+3. Create Entities 
+	- entities are objects to be mapped to a database table
+
+		@Entity
+		public class Customer{
+
+			@Id
+			private int empid;
+		}
+
+
+4. create EntityManager 
+	- it is responsible to persist the entities 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		
 ORM - object relation maping
 -------------------------------
