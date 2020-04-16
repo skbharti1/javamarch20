@@ -63,7 +63,9 @@ Solutions to these problems are....
 
 		- hibernate
 		- toplink
-	
+		- ibatis
+		
+		
 	Object persisitence
 	-----------------------------
 		- state of an object can be stored in database, and can be re-created at a later point 
@@ -81,8 +83,9 @@ Solutions to these problems are....
 		
 		- JPA providers
 			- hibernate jpa
-			- toplink - eclipselink
+			- eclipselink
 			- openjpa
+			- mybatis
 
 
 1. create JPA project / convert existing project to JPA
@@ -375,15 +378,17 @@ Persistence Unit
 
 ==> default entity mapping
 ---------------------------------
+ **=> for a class to an Entity of Jpa, 
+ 		- it has to be annotated with @Entity annotation
+ 		- @Id, define an unique identifier
+		- no-argument constructor
+		- can be concrete or abstract class
+		- all attributes/fieds of the Entity class become persistent by default 
 
-	-> @Entity annotation
-	-> @Id, define an unique identifier
-	-> no-argument constructor
-	-> can be concrete or abstract class
 	**-> enums  or interfaces cannot be entities
-	-> all attributes become persistence
+	**-> unless specified differently, JPA providers applies default rules for Table and columns
 
-	private long id			==> bigint
+	private long id				==> bigint
 	private String title		==> varchar(255)
 	private String author		==> varchar(255)
 	private boolean outOfStack;	==> smallint
