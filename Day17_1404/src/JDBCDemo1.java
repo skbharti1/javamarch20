@@ -23,10 +23,78 @@ public class JDBCDemo1 {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 						 
 			if(con!=null) {
-				//perform db operations
-				System.out.println("Connection to mysql success...");
 				
-				Employee emp = new Employee(108,"Sateesh", "Pune", 3000);
+//				String sql = "SELECT empid, ename, city, salary from employee";
+//				
+//				PreparedStatement stmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+//				
+//				ResultSet rs = stmt.executeQuery();
+//				
+//				rs.next();
+//				
+//					int empid = rs.getInt("empid");
+//					String ename = rs.getString(2);
+//					String city = rs.getString(3);
+//					int sal = rs.getInt(4);
+//				
+//					System.out.println(empid + "\t" + ename + "\t" + city + "\t"+ sal);
+//				
+//				rs.next();
+//				
+//					empid = rs.getInt("empid");
+//					ename = rs.getString(2);
+//					city = rs.getString(3);
+//					sal = rs.getInt(4);
+//				
+//					System.out.println(empid + "\t" + ename + "\t" + city + "\t"+ sal);
+//					
+//				rs.previous();
+//					empid = rs.getInt("empid");
+//					ename = rs.getString(2);
+//					city = rs.getString(3);
+//					sal = rs.getInt(4);
+//				
+//					System.out.println(empid + "\t" + ename + "\t" + city + "\t"+ sal);
+//				
+//				rs.absolute(5);
+//					empid = rs.getInt("empid");
+//					ename = rs.getString(2);
+//					city = rs.getString(3);
+//					sal = rs.getInt(4);
+//				
+//					System.out.println(empid + "\t" + ename + "\t" + city + "\t"+ sal);
+//					
+//					rs.updateString(3, "Chennai");
+//					rs.updateRow();
+//					
+//					empid = rs.getInt("empid");
+//					ename = rs.getString(2);
+//					city = rs.getString(3);
+//					sal = rs.getInt(4);
+//				
+//					System.out.println(empid + "\t" + ename + "\t" + city + "\t"+ sal);
+//				
+//				rs.close();
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				//perform db operations
+				//System.out.println("Connection to mysql success...");
+				
+				con.setAutoCommit(false);
+				
+				Employee emp = new Employee(109,"Rahul", "Mumbai", 3000);
 				
 				String sql = "INSERT INTO employee VALUES(?,?,?,?)";
 				
@@ -42,6 +110,9 @@ public class JDBCDemo1 {
 				st.setInt(4, emp.getSalary());
 				
 				boolean result = st.execute();
+				
+				con.commit();
+				
 				System.out.println(result);
 				
 				if(!result) {
